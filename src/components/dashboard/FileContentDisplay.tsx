@@ -1,4 +1,3 @@
-// src/components/dashboard/FileContentDisplay.tsx
 import { Eye, Download, Printer } from "lucide-react";
 
 interface Document {
@@ -9,14 +8,19 @@ interface Document {
 
 interface FileContentDisplayProps {
   documents: Document[];
-  view: "grid" | "list"; // 👈 agrega esta línea
+  view: "grid" | "list";
   onPreview: (archivo: Document) => void;
   onDownload: (archivo: Document) => void;
   onPrint: (archivo: Document) => void;
 }
 
-
-const FileContentDisplay = ({ documents }: FileContentDisplayProps) => {
+const FileContentDisplay = ({
+  documents,
+  view,
+  onPreview,
+  onDownload,
+  onPrint,
+}: FileContentDisplayProps) => {
   return (
     <div className="bg-white shadow-sm border rounded-lg overflow-x-auto">
       <table className="min-w-full text-sm">
@@ -39,13 +43,22 @@ const FileContentDisplay = ({ documents }: FileContentDisplayProps) => {
                 </span>
               </td>
               <td className="px-4 py-3 text-center space-x-2">
-                <button className="text-gray-600 hover:text-blue-600">
+                <button
+                  className="text-gray-600 hover:text-blue-600"
+                  onClick={() => onPreview(doc)}
+                >
                   <Eye size={16} />
                 </button>
-                <button className="text-gray-600 hover:text-green-600">
+                <button
+                  className="text-gray-600 hover:text-green-600"
+                  onClick={() => onDownload(doc)}
+                >
                   <Download size={16} />
                 </button>
-                <button className="text-gray-600 hover:text-gray-800">
+                <button
+                  className="text-gray-600 hover:text-gray-800"
+                  onClick={() => onPrint(doc)}
+                >
                   <Printer size={16} />
                 </button>
               </td>

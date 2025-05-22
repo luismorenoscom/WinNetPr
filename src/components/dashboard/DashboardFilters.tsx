@@ -11,7 +11,7 @@ interface DashboardFiltersProps {
   resetFilters: () => void;
 }
 
-export const DashboardFilters = ({
+const DashboardFilters = ({
   searchTerm,
   setSearchTerm,
   dateFilter,
