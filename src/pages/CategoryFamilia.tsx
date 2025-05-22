@@ -6,7 +6,6 @@ import { Worker, Viewer, SpecialZoomLevel } from "@react-pdf-viewer/core";
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
-import { useSidebarContext } from "@/context/sidebar-context";
 
 interface Documento {
   nombre: string;
@@ -48,8 +47,9 @@ const CategoryFamilia = () => {
   const [sortedDocs, setSortedDocs] = useState<Documento[]>(documentosBase);
   const [sortBy, setSortBy] = useState<keyof Documento | null>(null);
   const [sortAsc, setSortAsc] = useState(true);
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
-  const { isSidebarOpen } = useSidebarContext();
 
   const openPreview = (doc: Documento) => setSelectedDoc(doc);
   const closePreview = () => setSelectedDoc(null);
@@ -76,9 +76,9 @@ const CategoryFamilia = () => {
 
   return (
     <div className="flex flex-col h-screen overflow-hidden">
-      <AppHeader />
+      <AppHeader onToggleSidebar={() => setSidebarOpen(!isSidebarOpen)} />
       <div className="flex flex-1 overflow-hidden">
-        <AppSidebar />
+        <AppSidebar isOpen={isSidebarOpen} onClose={() => setSidebarOpen(false)} />
         <main className="flex-1 p-6 overflow-auto relative">
           <div className="flex items-center justify-between mb-6">
             <h1 className="text-2xl font-semibold">Familia</h1>
@@ -98,6 +98,7 @@ const CategoryFamilia = () => {
             </div>
           </div>
 
+          {/* Filtros */}
           <div className="bg-white rounded-lg p-4 shadow-sm border mb-6">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
               <div>
@@ -128,6 +129,7 @@ const CategoryFamilia = () => {
             </div>
           </div>
 
+          {/* Tabla */}
           {!isGridView ? (
             <div className="bg-white rounded-lg shadow-sm border overflow-x-auto">
               <table className="min-w-full text-sm table-fixed">

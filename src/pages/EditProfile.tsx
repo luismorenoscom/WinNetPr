@@ -20,6 +20,7 @@ const EditProfile = () => {
   });
 
   const [isSaving, setIsSaving] = useState(false);
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     const currentUser = JSON.parse(localStorage.getItem("current_user") || "null");
@@ -59,9 +60,9 @@ const EditProfile = () => {
 
   return (
     <div className="flex flex-col h-screen overflow-hidden">
-      <AppHeader />
+      <AppHeader onToggleSidebar={() => setSidebarOpen(!isSidebarOpen)} />
       <div className="flex flex-1 overflow-hidden">
-        <AppSidebar />
+        <AppSidebar isOpen={isSidebarOpen} onClose={() => setSidebarOpen(false)} />
 
         <main className="flex-1 p-6 overflow-auto bg-white">
           <div className="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow border">
