@@ -1,19 +1,14 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import {
-  Home,
-  Building,
-  Users,
-  LogOut,
-  X,
-  Settings,
-} from "lucide-react";
-import { useSidebarContext } from "@/context/sidebar-context";
+import { Home, Building, Users, LogOut, X, Settings } from "lucide-react";
 
-const AppSidebar = () => {
+interface AppSidebarProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const AppSidebar = ({ isOpen, onClose }: AppSidebarProps) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { isSidebarOpen, closeSidebar } = useSidebarContext();
-
   const currentUser = JSON.parse(localStorage.getItem("current_user") || "null");
   const rol = currentUser?.rol;
 
@@ -27,21 +22,21 @@ const AppSidebar = () => {
 
   return (
     <>
-      {isSidebarOpen && (
+      {isOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
-          onClick={closeSidebar}
+          onClick={onClose}
         />
       )}
 
       <aside
         className={`fixed z-50 top-0 left-0 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 md:relative md:translate-x-0 md:z-auto ${
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+          isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         <div className="flex items-center justify-between px-4 py-4 border-b md:hidden">
           <h2 className="text-lg font-semibold">Menú</h2>
-          <button onClick={closeSidebar}>
+          <button onClick={onClose}>
             <X />
           </button>
         </div>

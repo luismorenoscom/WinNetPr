@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Menu, UserCircle2, X } from "lucide-react";
-import { useSidebarContext } from "@/context/sidebar-context";
 
-const AppHeader = () => {
+interface AppHeaderProps {
+  onToggleSidebar?: () => void;
+}
+
+const AppHeader = ({ onToggleSidebar }: AppHeaderProps) => {
   const [showProfileModal, setShowProfileModal] = useState(false);
-  const { toggleSidebar } = useSidebarContext();
 
   const handleToggleProfile = () => {
     setShowProfileModal(!showProfileModal);
@@ -17,10 +19,11 @@ const AppHeader = () => {
   return (
     <header className="bg-white border-b shadow-sm px-6 py-4 flex justify-between items-center">
       <div className="flex items-center gap-2">
-        {/* Botón hamburguesa (solo visible en móvil) */}
-        <button onClick={toggleSidebar} className="md:hidden">
-          <Menu size={24} />
-        </button>
+        {onToggleSidebar && (
+          <button onClick={onToggleSidebar} className="md:hidden">
+            <Menu size={24} />
+          </button>
+        )}
         <img
           src="/assets/images/logo-winnet.png"
           alt="WinNet Logo"
@@ -28,7 +31,6 @@ const AppHeader = () => {
         />
       </div>
 
-      {/* Botón Mi cuenta */}
       <button
         onClick={handleToggleProfile}
         className="flex items-center space-x-2 text-sm hover:text-blue-600 transition"
@@ -37,7 +39,6 @@ const AppHeader = () => {
         <span>Mi cuenta</span>
       </button>
 
-      {/* Modal Editar Perfil */}
       {showProfileModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-lg w-full max-w-lg p-6 relative">
