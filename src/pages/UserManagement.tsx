@@ -9,6 +9,7 @@ const UserManagement = () => {
   const [users, setUsers] = useState<Usuario[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<Usuario | null>(null);
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
 
   const currentUser = JSON.parse(localStorage.getItem("current_user") || "null");
   const currentRole = currentUser?.rol;
@@ -124,9 +125,9 @@ const UserManagement = () => {
 
   return (
     <div className="flex flex-col h-screen overflow-hidden">
-      <AppHeader />
+      <AppHeader onToggleSidebar={() => setSidebarOpen(!isSidebarOpen)} />
       <div className="flex flex-1 overflow-hidden">
-        <AppSidebar />
+        <AppSidebar isOpen={isSidebarOpen} onClose={() => setSidebarOpen(false)} />
         <main className="flex-1 p-6 overflow-auto bg-white">
           <div className="flex items-center justify-between mb-6">
             <h1 className="text-2xl font-semibold">Gestión de Usuarios</h1>
