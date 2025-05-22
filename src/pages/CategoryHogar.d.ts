@@ -1,0 +1,2 @@
+declare const CategoryHogar: () => import("react/jsx-runtime").JSX.Element;
+export default CategoryHogar;
