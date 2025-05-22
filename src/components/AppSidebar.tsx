@@ -1,14 +1,22 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Home, Building, Users, LogOut, X, Settings } from "lucide-react";
+import {
+  Home,
+  Building,
+  Users,
+  LogOut,
+  X,
+  Settings,
+} from "lucide-react";
 
-interface AppSidebarProps {
+type AppSidebarProps = {
   isOpen: boolean;
   onClose: () => void;
-}
+};
 
 const AppSidebar = ({ isOpen, onClose }: AppSidebarProps) => {
   const location = useLocation();
   const navigate = useNavigate();
+
   const currentUser = JSON.parse(localStorage.getItem("current_user") || "null");
   const rol = currentUser?.rol;
 
@@ -47,7 +55,7 @@ const AppSidebar = ({ isOpen, onClose }: AppSidebarProps) => {
               Categorías
             </p>
             <ul className="space-y-1">
-              {[
+              {[ 
                 { path: "/categoria-bancaria", label: "Bancaria", icon: Home },
                 { path: "/categoria-empresa", label: "Empresa", icon: Building },
                 { path: "/categoria-hogar", label: "Hogar", icon: Home },

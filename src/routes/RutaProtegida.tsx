@@ -1,4 +1,5 @@
 import { Navigate } from "react-router-dom";
+import React from "react";
 
 type RutaProtegidaProps = {
   children: JSX.Element;

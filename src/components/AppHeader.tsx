@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Menu, UserCircle2, X } from "lucide-react";
 
-interface AppHeaderProps {
-  onToggleSidebar?: () => void;
-}
+type AppHeaderProps = {
+  onToggleSidebar: () => void;
+};
 
 const AppHeader = ({ onToggleSidebar }: AppHeaderProps) => {
   const [showProfileModal, setShowProfileModal] = useState(false);
@@ -19,11 +19,9 @@ const AppHeader = ({ onToggleSidebar }: AppHeaderProps) => {
   return (
     <header className="bg-white border-b shadow-sm px-6 py-4 flex justify-between items-center">
       <div className="flex items-center gap-2">
-        {onToggleSidebar && (
-          <button onClick={onToggleSidebar} className="md:hidden">
-            <Menu size={24} />
-          </button>
-        )}
+        <button onClick={onToggleSidebar} className="md:hidden">
+          <Menu size={24} />
+        </button>
         <img
           src="/assets/images/logo-winnet.png"
           alt="WinNet Logo"
