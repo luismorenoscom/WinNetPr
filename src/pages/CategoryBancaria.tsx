@@ -21,7 +21,7 @@ const CategoryBancaria = () => {
   const [sortedDocs, setSortedDocs] = useState<Documento[]>(documentosBase);
   const [sortBy, setSortBy] = useState<keyof Documento | null>(null);
   const [sortAsc, setSortAsc] = useState(true);
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
@@ -50,9 +50,9 @@ const CategoryBancaria = () => {
 
   return (
     <div className="flex flex-col h-screen overflow-hidden">
-      <AppHeader onToggleSidebar={() => setSidebarOpen(!isSidebarOpen)} />
+      <AppHeader onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
       <div className="flex flex-1 overflow-hidden">
-        <AppSidebar isOpen={isSidebarOpen} onClose={() => setSidebarOpen(false)} />
+        <AppSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
         <main className="flex-1 p-6 overflow-auto relative">
           <div className="flex items-center justify-between mb-6">
             <h1 className="text-2xl font-semibold">Bancaria</h1>
